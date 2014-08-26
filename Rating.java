@@ -1,30 +1,48 @@
 package net.oreilly.john.ratemyapartment;
 
+import java.util.Date;
 import java.util.UUID;
 
 /**
  * Created by john on 28/07/14.
  */
 public class Rating {
+    private UUID Id;
+    private String Title;
+    private Date mDate;
 
+    public Date getDate() {
+        return mDate;
+    }
+
+    public void setDate(Date mDate) {
+        this.mDate = mDate;
+    }
+
+    public boolean isSolved() {
+        return mSolved;
+    }
+
+    public void setSolved(boolean mSolved) {
+        this.mSolved = mSolved;
+    }
+
+    private boolean mSolved;
 
     public Rating(){
-        mId = UUID.randomUUID();
-
+        Id = UUID.randomUUID();
+        mDate = new Date();
     }
 
-    private UUID mId;
-    private String mTitle;
-
-    public UUID getmId() {
-        return mId;
+    public UUID getId() {
+        return Id;
     }
 
-    public String getmTitle() {
-        return mTitle;
+    public String getTitle() {
+        return Title;
     }
 
-    public void setmTitle(String mTitle) {
-        this.mTitle = mTitle;
+    public void setTitle(String Title) {
+        this.Title = Title;
     }
 }

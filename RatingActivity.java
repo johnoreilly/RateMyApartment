@@ -3,6 +3,7 @@ package net.oreilly.john.ratemyapartment;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,15 +14,18 @@ import android.os.Build;
 
 
 
-public class MyRating extends Activity {
+public class RatingActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(android.R.layout.activity_my_rating);
-        if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
-                    .add(android.R.id.container, new PlaceholderFragment())
+        setContentView(R.layout.activity_my_rating);
+        FragmentManager fm = getFragmentManager();
+        Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
+        if(fragment==null){
+            fragment = new RatingFragment();
+            fm.beginTransaction()
+                    .add(R.id.fragmentContainer,fragment)
                     .commit();
         }
     }
@@ -57,7 +61,7 @@ public class MyRating extends Activity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            return inflater.inflate(android.R.layout.fragment_my_rating, container, false);
+            return inflater.inflate(R.layout.fragment_my_rating, container, false);
         }
     }
 }
