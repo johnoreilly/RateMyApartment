@@ -14,9 +14,11 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
+import java.util.UUID;
+
 
 public class RatingFragment extends Fragment {
-
+    public static final String EXTRA_RATING_ID = "net.oreilly.john.ratemyapartment";
     private Rating mRating;
     private EditText mTitleField;
     private Button mDateButton;
@@ -25,13 +27,15 @@ public class RatingFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        mRating = new Rating();
+        UUID ratingId = (UUID)getActivity().getIntent().getSerializableExtra(EXTRA_RATING_ID);
+        mRating = RatingLab.get(getActivity()).getRating(ratingId);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup parent,Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.fragment_rating, parent, false);
         mTitleField = (EditText)v.findViewById(R.id.rating_title);
+        mTitleField.setText(mRating.getTitle());
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence c, int start, int count, int after) {
@@ -52,6 +56,7 @@ public class RatingFragment extends Fragment {
         mDateButton.setText(mRating.getDate().toString());
         mDateButton.setEnabled(false);
         mSolvedCheckBox=(CheckBox)v.findViewById(R.id.rating_solved);
+        mSolvedCheckBox.setChecked(mRating.isSolved());
         mSolvedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

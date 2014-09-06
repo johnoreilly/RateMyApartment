@@ -16,6 +16,12 @@ public class RatingLab {
     private RatingLab(Context appContext){
         mAppContext = appContext;
         mRatings = new ArrayList<Rating>();
+        for (int i=0;i<100;i++){
+            Rating r = new Rating();
+            r.setTitle("Rating is:" + i);
+            r.setSolved(i%2==0);
+            mRatings.add(r);
+        }
     }
 
     public static RatingLab get(Context c){
