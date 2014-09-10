@@ -10,6 +10,8 @@ public class Rating {
     private UUID Id;
     private String Title;
     private Date mDate;
+    private boolean mSolved;
+
 
     public Date getDate() {
         return mDate;
@@ -27,7 +29,7 @@ public class Rating {
         this.mSolved = mSolved;
     }
 
-    private boolean mSolved;
+
 
     public Rating(){
         Id = UUID.randomUUID();

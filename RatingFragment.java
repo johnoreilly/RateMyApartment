@@ -24,10 +24,18 @@ public class RatingFragment extends Fragment {
     private Button mDateButton;
     private CheckBox mSolvedCheckBox;
 
+    public static RatingFragment newInstance(UUID ratingId) {
+        Bundle args = new Bundle();
+        args.putSerializable(EXTRA_RATING_ID, ratingId);
+        RatingFragment fragment = new RatingFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        UUID ratingId = (UUID)getActivity().getIntent().getSerializableExtra(EXTRA_RATING_ID);
+        UUID ratingId = (UUID)getArguments().getSerializable(EXTRA_RATING_ID);
         mRating = RatingLab.get(getActivity()).getRating(ratingId);
     }
 
